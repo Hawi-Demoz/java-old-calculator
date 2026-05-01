@@ -138,4 +138,3 @@ public class SimpleCalculator extends JFrame {
         });
     }
 }
-
