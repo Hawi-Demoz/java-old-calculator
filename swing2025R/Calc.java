@@ -102,7 +102,7 @@ public class Calc extends JFrame {
             if ("=".equals(text)) {
                 try {
                     double num2;
-                    if (typed.length() == 0) {
+                    if (operator.isEmpty() && startNew) {
                         if (lastOperator.isEmpty()) {
                             display.setText(display.getText().isEmpty() ? "0" : display.getText());
                             return;
@@ -134,7 +134,6 @@ public class Calc extends JFrame {
 
                     display.setText(format(result));
                     typed.setLength(0);
-                    typed.append(format(result));
                     num1 = result;
                     operator = "";
                     lastOperator = activeOperator;
