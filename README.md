@@ -4,11 +4,14 @@ A simple old-style calculator built with Java Swing.
 
 ## Features
 
-- Basic calculator layout with a 4x4 button grid
+- Retro calculator layout with a larger LCD-style display
+- Memory controls: `MC`, `MR`, `M+`, and `M-`
+- Clear, clear-entry, backspace, and sign toggle buttons
 - Supports addition, subtraction, multiplication, and division
 - Handles decimal numbers
-- Shows the expression and the result in the display
+- Shows the current operation and the result in the display
 - Displays an error message for division by zero
+- Supports keyboard input for digits, operators, Enter, Backspace, and Escape
 
 ## Compile
 
