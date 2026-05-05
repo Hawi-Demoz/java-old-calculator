@@ -9,7 +9,9 @@ public class Calc extends JFrame {
     private final JTextField display = new JTextField();
     private final StringBuilder typed = new StringBuilder();
     private double num1 = 0;
+    private double lastNum2 = 0;
     private String operator = "";
+    private String lastOperator = "";
     private boolean startNew = true;
     private boolean error = false;
 
@@ -87,6 +89,7 @@ public class Calc extends JFrame {
                 try {
                     num1 = Double.parseDouble(typed.length() == 0 ? display.getText() : typed.toString());
                     operator = text;
+                    lastOperator = text;
                     typed.setLength(0);
                     startNew = true;
                     display.setText(format(num1) + " " + operator + " ");
@@ -98,10 +101,22 @@ public class Calc extends JFrame {
 
             if ("=".equals(text)) {
                 try {
-                    double num2 = Double.parseDouble(typed.toString());
+                    double num2;
+                    if (typed.length() == 0) {
+                        if (lastOperator.isEmpty()) {
+                            display.setText(display.getText().isEmpty() ? "0" : display.getText());
+                            return;
+                        }
+                        num2 = lastNum2;
+                    } else {
+                        num2 = Double.parseDouble(typed.toString());
+                        lastNum2 = num2;
+                    }
                     double result;
 
-                    switch (operator) {
+                    String activeOperator = operator.isEmpty() ? lastOperator : operator;
+
+                    switch (activeOperator) {
                         case "+": result = num1 + num2; break;
                         case "-": result = num1 - num2; break;
                         case "*": result = num1 * num2; break;
@@ -122,6 +137,7 @@ public class Calc extends JFrame {
                     typed.append(format(result));
                     num1 = result;
                     operator = "";
+                    lastOperator = activeOperator;
                     startNew = true;
                 } catch (Exception ex) {
                     showError();
